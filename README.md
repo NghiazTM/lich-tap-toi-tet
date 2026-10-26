@@ -149,3 +149,9 @@ Bốn mục **Buổi tập · Lịch tuần · Tiến độ · Âm nhạc** dùn
 `navigation.js` quản lý điều hướng theo URL, hỗ trợ quay lại và các liên kết cũ. Chuyển mục chỉ ẩn phần giao diện, không tạo lại hay dừng đồng hồ/nhạc. Hiệu ứng chuyển mục, phản hồi nút và tiến độ tôn trọng cài đặt giảm chuyển động. Dữ liệu được giữ nguyên theo các khóa lưu trữ cũ.
 
 Giao diện chính nằm trong `styles.css`, `guide-styles.css`, `tools.css` và `music.css`; đã bỏ lớp ghi đè `pro.css` cũ. Ảnh xem trước: `artifacts/unified-desktop.png`, `artifacts/unified-mobile.png`, `artifacts/unified-schedule.png`, `artifacts/unified-timer-mobile.png` và `artifacts/unified-music.png`.
+
+### Chuyển động 3D
+
+Mục Buổi tập có cụm vòng năng lượng Three.js xoay nhẹ, phản ứng theo chuột và thay đổi nhịp theo trạng thái đồng hồ. Nút **Chuyển động** bật/tắt hiệu ứng và lưu lựa chọn riêng trên thiết bị. Hiệu ứng dừng khi chuyển mục, ra khỏi vùng nhìn hoặc ẩn thẻ trình duyệt; chế độ giảm chuyển động dùng hình tĩnh. Nếu WebGL không khả dụng, hình dự phòng vẫn giữ nguyên bố cục.
+
+`motion.js` tải Three.js 0.186.1 từ bản sao cục bộ trong `assets/vendor/three/`, không cần CDN hay bước build. Điện thoại dùng độ phân giải và số hạt thấp hơn, tối đa 30 khung/giây. Ảnh xem trước: `artifacts/three-desktop.png` và `artifacts/three-mobile.png`.
