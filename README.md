@@ -142,6 +142,10 @@ Phiên bản đồng hồ và nhạc đã kiểm tra bấm giờ, ghi vòng, kh�
 Khu vực YouTube Mix dùng khung video lớn, nền đen, tên bài và các nút tròn phía dưới. Nút mở rộng tăng diện tích video; danh sách chuyển xuống dưới trên điện thoại. Đồng hồ và mục **Nghe từ thiết bị** vẫn dùng độc lập; mục nhạc thiết bị có thể thu gọn. Ảnh bìa được lưu cùng ứng dụng, khung YouTube cần Internet để phát. Nút toàn màn hình nằm trong trình phát YouTube gốc.
 
 
-### Giao diện không gian tập luyện
+### Giao diện ứng dụng thống nhất
 
-Bản giao diện mới dùng thời khóa biểu bảy ngày có tên buổi và bài tập thực tế, tóm tắt tiến độ tuần, khu vực bài tập đi cùng đồng hồ lớn và các thẻ phục hồi đồng bộ đỏ đen. Trên điện thoại, lịch cuộn ngang trong khung riêng và đồng hồ xuất hiện trước danh sách bài tập. Dữ liệu và các chế độ đồng hồ giữ nguyên. Lớp trình bày nằm trong `designs/workout-dashboard/pro.css`.
+Bốn mục **Buổi tập · Lịch tuần · Tiến độ · Âm nhạc** dùng chung một hệ bố cục, màu đỏ đen và thành phần điều khiển. Chọn ngày trong lịch để mở đúng buổi tập; mở đồng hồ từ bài đang chọn để áp dụng thời gian tập/nghỉ. Mục Tiến độ hiển thị kết quả tuần cùng lượng nước của ngày đang chọn. Điện thoại có thanh điều hướng cố định bên dưới, lịch dạng danh sách và vùng chạm lớn.
+
+`navigation.js` quản lý điều hướng theo URL, hỗ trợ quay lại và các liên kết cũ. Chuyển mục chỉ ẩn phần giao diện, không tạo lại hay dừng đồng hồ/nhạc. Hiệu ứng chuyển mục, phản hồi nút và tiến độ tôn trọng cài đặt giảm chuyển động. Dữ liệu được giữ nguyên theo các khóa lưu trữ cũ.
+
+Giao diện chính nằm trong `styles.css`, `guide-styles.css`, `tools.css` và `music.css`; đã bỏ lớp ghi đè `pro.css` cũ. Ảnh xem trước: `artifacts/unified-desktop.png`, `artifacts/unified-mobile.png`, `artifacts/unified-schedule.png`, `artifacts/unified-timer-mobile.png` và `artifacts/unified-music.png`.

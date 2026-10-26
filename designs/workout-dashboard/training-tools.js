@@ -286,6 +286,7 @@
     save(); renderControls(); updateClock(); syncWake(); note('Đã chuyển sang nhịp tiếp theo.');
   }
   function selectExercise(item) {
+    window.NhipView?.open('workout', { scroll: false });
     if (!item || !integer(item.hold, 1, 3600) || !integer(item.rest, 0, 3600) || !integer(item.sets, 1, 50)) return false;
     if (running() || isLocked(state.sessions.interval)) { note('Tạm dừng và đặt lại chế độ Tập và nghỉ trước khi áp dụng bài khác.'); $('#timer-card').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); return false; }
     stopAlert(); state.mode = 'interval'; state.sessions.interval = blank();

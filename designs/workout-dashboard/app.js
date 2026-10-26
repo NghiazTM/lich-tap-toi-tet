@@ -173,6 +173,11 @@
   function renderSession() {
     const day = template();
     const count = checkedCount(selected);
+    $('#selected-day-label').textContent = formatDate(selected, { weekday: 'long', day: 'numeric', month: 'long' });
+    $('#selected-session-label').textContent = displayPlanTitle(day.title);
+    $('#selected-session-count').textContent = day.training ? `${count}/${day.exercises.length} bài hoàn thành` : 'Nghỉ và phục hồi';
+    $('#water-date-label').textContent = `Ngày đang chọn: ${formatDate(selected, { weekday: 'long', day: 'numeric', month: 'long' })}`;
+    $('#progress-week-label').textContent = $('#week-label').textContent;
     $('#session-date').textContent = `${selected === TODAY ? 'HÔM NAY' : WEEKDAYS[dayIndex(selected)].toLocaleUpperCase('vi-VN')} · ${formatDate(selected, { day: 'numeric', month: 'long' }).toLocaleUpperCase('vi-VN')}`;
     $('#exercise-title').textContent = displayPlanTitle(day.title);
     $('#session-type').textContent = day.training ? 'Tại nhà · Không cần tạ' : 'Nạp lại năng lượng';
@@ -253,7 +258,7 @@
     const close = event.target.closest('[data-close]');
     if (close) { close.closest('dialog').close(); return; }
     const dateButton = event.target.closest('[data-date]');
-    if (dateButton) { selectDate(dateButton.dataset.date); return; }
+    if (dateButton) { selectDate(dateButton.dataset.date); window.NhipView?.open('workout', { focus: true }); return; }
     const target = event.target.closest('[data-action]');
     if (!target || target.disabled) return;
     const action = target.dataset.action;
@@ -343,10 +348,6 @@
     if (!integer(goal, 250, 6000) || goal % 250) return;
     data.waterGoal = goal; save(); $('#water-dialog').close(); renderWater(); toast('Đã lưu mục tiêu cá nhân.');
   });
-  document.querySelectorAll('[data-nav]').forEach((link) => link.addEventListener('click', () => {
-    document.querySelectorAll('[data-nav]').forEach((item) => { item.classList.remove('active'); item.removeAttribute('aria-current'); });
-    link.classList.add('active'); link.setAttribute('aria-current', 'page');
-  }));
   document.querySelectorAll('dialog').forEach((dialog) => dialog.addEventListener('click', (event) => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); } }));
   $('#visual-dialog').addEventListener('close', () => { if (visualOpener?.isConnected) visualOpener.focus({ preventScroll: true }); });
   document.addEventListener('error', (event) => {
