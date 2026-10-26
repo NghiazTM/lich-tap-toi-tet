@@ -1,0 +1,10 @@
+# Supplemental wall-press illustration
+
+- Mode: built-in `image_gen.imagegen`, not CLI/API fallback.
+- Output: `wall-press.png`, opaque landscape image.
+- Reference: `towel-pull.png`, used for illustration style only.
+- This image is generated; it is **not** a frame from the Prime Form video.
+
+## Final prompt
+
+Use case: scientific-educational. Asset type: single landscape exercise illustration for a Vietnamese home isometric training dashboard. Primary request: ONE clear side-profile illustration of an adult male athlete performing an ISOMETRIC WALL PRESS, actively pushing against an immovable vertical wall. Supporting reference image is STYLE REFERENCE ONLY: use the clean black background, white-haired anime fitness anatomy illustration, grayscale skin/muscles and orange shorts style of the athlete; ignore ALL social-media UI, captions, diagrams, typography and page layout in the reference. Create a NEW illustration, not a screenshot replica. Composition: landscape 16:9, full body head to toes clearly visible, athlete centered-left and wall on right, floor line horizontal. Athlete has BOTH palms flat on wall at shoulder/chest height, wrists neutral, arms nearly straight but soft elbows, shoulders down, torso in one controlled line slightly leaning into wall, one foot forward with soft knee and other foot behind for stable split stance, both feet on floor. This is a held static push against a wall, not a handstand, not a floor pushup. Two anatomically correct arms and hands, two legs, five fingers per hand where visible. Keep hands-to-wall contact and wall vertical physically plausible. Neutral face and normal athletic proportions, not extreme bodybuilding. Black backdrop, subtle light-gray wall, faint gray floor, grayscale figure, vivid but restrained orange knee-length shorts; slight warm highlight on working shoulders and triceps. Plenty of breathing room around athlete. Crisp high-resolution educational illustration with restrained anatomy shading. No text, no labels, no numbers, no arrows, no logos, no watermark, no Facebook UI, no furniture, no extra people. Opaque black background, not transparent.

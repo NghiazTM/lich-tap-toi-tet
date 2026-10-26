@@ -1,0 +1,14 @@
+{
+  "name": "nhip-tap",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Biểu đồ và lịch tập luyện cá nhân bằng tiếng Việt",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node server.mjs",
+    "start:lan": "node server.mjs --lan"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
