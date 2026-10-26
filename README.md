@@ -152,6 +152,8 @@ Giao diện chính nằm trong `styles.css`, `guide-styles.css`, `tools.css` và
 
 ### Chuyển động 3D
 
-Mục Buổi tập có cụm vòng năng lượng Three.js xoay nhẹ, phản ứng theo chuột và thay đổi nhịp theo trạng thái đồng hồ. Nút **Chuyển động** bật/tắt hiệu ứng và lưu lựa chọn riêng trên thiết bị. Hiệu ứng dừng khi chuyển mục, ra khỏi vùng nhìn hoặc ẩn thẻ trình duyệt; chế độ giảm chuyển động dùng hình tĩnh. Nếu WebGL không khả dụng, hình dự phòng vẫn giữ nguyên bố cục.
+Toàn trang dùng chung một không gian Three.js: nền lưới có chiều sâu và các hạt chuyển động theo góc nhìn. Bốn mục có cảnh lớn riêng: vòng năng lượng theo nhịp đồng hồ, lịch nổi bảy ngày với ngày đang chọn, vòng tiến độ theo tỷ lệ hoàn thành thực tế, đĩa nhạc và cột nhịp theo trạng thái phát nhạc. Hiệu ứng nhạc là chuyển động minh họa trạng thái phát, không phải phân tích tần số âm thanh. Một số thẻ có độ nghiêng nhẹ theo chuột; các nút, biểu đồ, biểu mẫu và video vẫn dùng thành phần HTML gốc.
 
-`motion.js` tải Three.js 0.186.1 từ bản sao cục bộ trong `assets/vendor/three/`, không cần CDN hay bước build. Điện thoại dùng độ phân giải và số hạt thấp hơn, tối đa 30 khung/giây. Ảnh xem trước: `artifacts/three-desktop.png` và `artifacts/three-mobile.png`.
+Nút **Hiệu ứng 3D** trong thanh đầu trang dùng cho cả bốn mục và lưu lựa chọn riêng trên thiết bị. Cùng một canvas tiếp tục phục vụ các mục khi chuyển trang hoặc cuộn; chỉ có một vòng dựng hình. Hiệu ứng dừng khi ẩn thẻ trình duyệt hoặc tắt chuyển động. Chế độ giảm chuyển động dùng hình tĩnh và không tải WebGL. Nếu WebGL không khả dụng hoặc mất ngữ cảnh, hình dự phòng vẫn giữ nguyên bố cục. Dữ liệu lịch tập, đồng hồ và nhạc giữ nguyên.
+
+`motion.js` tải Three.js 0.186.1 từ bản sao cục bộ trong `assets/vendor/three/`, không cần CDN hay bước build. Điện thoại dùng độ phân giải và số hạt thấp hơn, tối đa 30 khung/giây. Ảnh xem trước: `artifacts/spatial-workout.png`, `artifacts/spatial-schedule.png`, `artifacts/spatial-progress.png`, `artifacts/spatial-music.png` và `artifacts/spatial-mobile.png`.
