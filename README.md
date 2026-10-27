@@ -150,10 +150,14 @@ Bốn mục **Buổi tập · Lịch tuần · Tiến độ · Âm nhạc** dùn
 
 Giao diện chính nằm trong `styles.css`, `guide-styles.css`, `tools.css` và `music.css`; đã bỏ lớp ghi đè `pro.css` cũ. Ảnh xem trước: `artifacts/unified-desktop.png`, `artifacts/unified-mobile.png`, `artifacts/unified-schedule.png`, `artifacts/unified-timer-mobile.png` và `artifacts/unified-music.png`.
 
-### Chuyển động 3D
+### Phòng tập tương tác 3D
 
-Toàn trang dùng chung một không gian Three.js: nền lưới có chiều sâu và các hạt chuyển động theo góc nhìn. Bốn mục có cảnh lớn riêng: vòng năng lượng theo nhịp đồng hồ, lịch nổi bảy ngày với ngày đang chọn, vòng tiến độ theo tỷ lệ hoàn thành thực tế, đĩa nhạc và cột nhịp theo trạng thái phát nhạc. Hiệu ứng nhạc là chuyển động minh họa trạng thái phát, không phải phân tích tần số âm thanh. Một số thẻ có độ nghiêng nhẹ theo chuột; các nút, biểu đồ, biểu mẫu và video vẫn dùng thành phần HTML gốc.
+Mở trang không có hash để vào **Toàn cảnh**: phòng tập toàn màn hình có sàn, tường, dầm đèn đỏ, giàn tạ, ghế tập, bảng lịch, bảng tiến độ và bàn nhạc. Chọn nhãn nổi, thiết bị trong phòng hoặc thanh điều hướng để bay tới một trong bốn trạm. Các bảng chức năng là HTML thật, cuộn riêng trong khung nổi; nút **Mở rộng** dành thêm chỗ cho công việc. **Về phòng tập** mở lại toàn cảnh. Trên điện thoại, bảng mở như một trang tính phía dưới, còn phòng và thanh điều hướng luôn nhìn thấy.
 
-Nút **Hiệu ứng 3D** trong thanh đầu trang dùng cho cả bốn mục và lưu lựa chọn riêng trên thiết bị. Cùng một canvas tiếp tục phục vụ các mục khi chuyển trang hoặc cuộn; chỉ có một vòng dựng hình. Hiệu ứng dừng khi ẩn thẻ trình duyệt hoặc tắt chuyển động. Chế độ giảm chuyển động dùng hình tĩnh và không tải WebGL. Nếu WebGL không khả dụng hoặc mất ngữ cảnh, hình dự phòng vẫn giữ nguyên bố cục. Dữ liệu lịch tập, đồng hồ và nhạc giữ nguyên.
+Bốn giao diện chỉ mount một lần; đổi trạm không dừng đồng hồ hoặc nhạc và không đổi khóa lưu trữ. Chọn ngày trong Lịch tuần mở đúng buổi tập. Các hash cũ (`#main`, `#exercises`, `#timer-card`, `#nutrition`, `#training-tools`) và nút Back vẫn dùng được. Menu dấu ba chấm đầu trang mở nguồn/ghi chú và thư viện tư thế; cài đặt kế hoạch dùng nút riêng. Không phát nhạc tự động khi vào trang.
 
-`motion.js` tải Three.js 0.186.1 từ bản sao cục bộ trong `assets/vendor/three/`, không cần CDN hay bước build. Điện thoại dùng độ phân giải và số hạt thấp hơn, tối đa 30 khung/giây. Ảnh xem trước: `artifacts/spatial-workout.png`, `artifacts/spatial-schedule.png`, `artifacts/spatial-progress.png`, `artifacts/spatial-music.png` và `artifacts/spatial-mobile.png`.
+`motion.js` dùng một perspective camera, một scene/canvas/context và Three.js 0.186.1 cục bộ trong `assets/vendor/three/`. Không cần CDN hoặc build. Camera và bảng chuyển cảnh cùng nhau; tương tác biểu mẫu/video dùng HTML gốc. Đĩa nhạc chỉ minh họa trạng thái phát, không phân tích âm thanh. Thanh tiến độ trong phòng lấy phần trăm thật từ giao diện.
+
+Nút chuyển động lưu `nhip-tap-motion-v1`. Khi tắt, camera/bảng đổi ngay và vòng dựng hình dừng; khi tắt từ trước hoặc thiết bị giảm chuyển động, trang không khởi tạo WebGL và vẫn có đủ bốn trạm qua giao diện DOM. Mất WebGL dùng phòng CSS dự phòng. Trang ẩn dừng dựng hình; điện thoại giới hạn DPR 1/30fps, desktop DPR 1.5. `NhipMotion.getState()` cung cấp mode/station, vị trí/đích camera thật, trạng thái chuyển cảnh, số khung, canvas và renderer. Tài nguyên được dispose khi rời trang.
+
+Ảnh xem trước: `artifacts/room-overview-desktop.png`, `artifacts/room-training-desktop.png`, `artifacts/room-calendar-desktop.png`, `artifacts/room-music-desktop.png`, `artifacts/room-overview-mobile.png`, `artifacts/room-training-mobile.png`.
