@@ -17,7 +17,7 @@ document.querySelectorAll('[data-view]').forEach(view => {
 });
 let enabled = true;
 try { enabled = localStorage.getItem(KEY) !== 'off'; } catch { /* The preference is optional. */ }
-let THREE, renderer, scene, camera, ambient, dust, grid;
+let THREE, renderer, scene, camera, ambient, dust, grid, modelBounds;
 let initializing = null, failed = false, disposed = false, looping = false;
 let current = window.NhipView?.getState() || 'workout';
 let frames = 0, lastFrame = 0, elapsed = 0, phaseTime = 0, lastSample = 0;
@@ -26,6 +26,7 @@ let modelScale = 1, targetX = 0, targetY = 0;
 const pointer = { x: 0, y: 0, sx: 0, sy: 0 };
 const models = {}, resources = new Set(), segments = [], calendarTiles = [], bars = [];
 const shared = {};
+const artBand = { left: 0, right: 0, top: 0, bottom: 0 };
 const visible = () => !document.hidden;
 const canMove = () => enabled && !reduce.matches && visible() && !disposed && !failed;
 const keep = resource => { resources.add(resource); return resource; };
@@ -130,6 +131,10 @@ function place() {
   targetX = box.left + box.width / 2 - innerWidth / 2;
   targetY = innerHeight / 2 - box.top - box.height * .44;
   modelScale = Math.min(box.width / 3.9, box.height / 3.5, mobile.matches ? 75 : 108);
+  artBand.left = box.left + 12 - innerWidth / 2;
+  artBand.right = box.right - 12 - innerWidth / 2;
+  artBand.top = innerHeight / 2 - box.top - 12;
+  artBand.bottom = innerHeight / 2 - box.bottom + 34;
   if (ambient) {
     ambient.position.set(pointer.sx * 12, -innerHeight * .48 + Math.min(scrollY, 900) * .08, -180);
     grid.rotation.z = -.2 + pointer.sx * .01;
@@ -166,6 +171,20 @@ function draw(now = performance.now(), staticFrame = false) {
         const height = playing ? .4 + (Math.sin(elapsed * 4 + index * .8) + 1) * .38 : .3;
         bar.scale.y = height; bar.position.y = -1.58 + height * .08;
       });
+    }
+    // Keep the complete rotated silhouette inside the mobile art band.
+    // This reserves room for the description above and the caption below.
+    if (mobile.matches && model.visible) {
+      model.updateMatrixWorld(true);
+      modelBounds.setFromObject(model);
+      const width = modelBounds.max.x - modelBounds.min.x;
+      const height = modelBounds.max.y - modelBounds.min.y;
+      const fit = Math.min(1, (artBand.right - artBand.left) / Math.max(width, .001), (artBand.top - artBand.bottom) / Math.max(height, .001));
+      model.scale.multiplyScalar(fit);
+      model.updateMatrixWorld(true);
+      modelBounds.setFromObject(model);
+      model.position.x += (artBand.left + artBand.right - modelBounds.min.x - modelBounds.max.x) / 2;
+      model.position.y += (artBand.top + artBand.bottom - modelBounds.min.y - modelBounds.max.y) / 2;
     }
   });
   dust.rotation.z = elapsed * .009;
@@ -211,7 +230,7 @@ async function initialize() {
       if (!context) { fallback(); return; }
       renderer = new THREE.WebGLRenderer({ canvas, context, alpha: true, antialias: !mobile.matches });
       renderer.setClearColor(0x09090b, 0);
-      scene = new THREE.Scene(); camera = new THREE.OrthographicCamera(-1, 1, 1, -1, .1, 3000); camera.position.z = 1000;
+      scene = new THREE.Scene(); modelBounds = new THREE.Box3(); camera = new THREE.OrthographicCamera(-1, 1, 1, -1, .1, 3000); camera.position.z = 1000;
       scene.add(new THREE.HemisphereLight(0xffe7ee, 0x300719, 2.8));
       const light = new THREE.DirectionalLight(0xff6b85, 4); light.position.set(400, 500, 600); scene.add(light);
       const rim = new THREE.DirectionalLight(0xffffff, 3); rim.position.set(-400, 200, 300); scene.add(rim);
